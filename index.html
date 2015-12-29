@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cyborg/bootstrap.min.css" rel="stylesheet"
+          integrity="sha256-P5gS9tfR0S0WBWIsn0OUp1YR2pcYMGwgfwjxX3AqncA= sha512-Jwcua5M3o+swptQ5w8vJxSuiFjfuTG0mwkJAQ/XMoT8dLVr7ZyhiLxEZPwuDSTtQEl22wYbdfQAlGxd7otaCJw=="
+          crossorigin="anonymous">
+    <link  rel="stylesheet" href="css/style.css">
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="app.js"></script>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body ng-app="ngCSGOStatus">
+<div class="container appWrapper" ng-controller="SteamStatusCtrl">
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h1 class="panel-title">ngCsgoStatus</h1>
+        </div>
+    </div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Matchmaking</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="(key, data) in SteamDataResponse.result.matchmaking">
+                    <span class="label label-primary label-as-badge pull-right">{{data}}</span>
+                    {{key | caps}}:
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Services</h3>
+        </div>
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="(key, data) in SteamDataResponse.result.services">
+                    <span ng-class="getClass(data)">{{data | caps}}</span>
+                    {{key}}:
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="panel panel-success">
+        <div class="panel-heading">
+            <h3 class="panel-title">Data Centers</h3>
+        </div>
+
+        <div class="panel-body">
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="(key, data) in SteamDataResponse.result.datacenters">
+                    <span ng-class="getClass(data.capacity)">Capacity: {{data.capacity | caps}}</span>
+                    <span ng-class="getClass(data.load)">Load: {{data.load | caps}}</span>
+                    <span class="panel-titles">{{key}}:
+                </li>
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>
